@@ -805,10 +805,13 @@ bool RC_Channel::read_aux()
         // here e.g. RCMAP_ROLL etc once they become options
         return false;
 #if AP_VIDEOTX_ENABLED
-    } else if (_option == AUX_FUNC::VTX_POWER) {
+    } else if ( _option == AUX_FUNC::VTX_POWER ) {
         int8_t position;
-        if (read_9pos_switch(position)) {
-            AP::vtx().change_power(position);
+        if ( read_9pos_switch( position) ) {                                    // §§RK this was  read_6pos_switch() , which I replaced by  read_9pos_switch()
+            if ( position > (6-1) ) {                                           // §§RK confine to values the former read_6pos_switch() could return
+                position = (6-1);
+            }
+            AP::vtx().change_power( position);
             return true;
         }
         return false;
