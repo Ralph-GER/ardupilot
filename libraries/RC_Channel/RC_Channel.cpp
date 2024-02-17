@@ -549,30 +549,24 @@ void RC_Channel::reset_mode_switch()
     read_mode_switch();
 }
 
-// read a 6 position switch
-bool RC_Channel::read_6pos_switch(int8_t& position)
+// Reads a "9 position switch".
+// Returns false if an error occured, true otherwise. 
+bool RC_Channel::read_9pos_switch( int8_t& position)
 {
-    // calculate position of 6 pos switch
     const uint16_t pulsewidth = get_radio_in();
-    if (pulsewidth <= RC_MIN_LIMIT_PWM || pulsewidth >= RC_MAX_LIMIT_PWM) {
+
+    // check PWM range and calculate position of 9 pos switch
+    if (     pulsewidth <= ( 1000 - 50 )                    // §§§ argh -> SWITCH_PWM_MIN, SWITCH_PWM_OFFSET/2
+          || pulsewidth >= ( 1000 + 49  ) + ( 9 - 1 )*100   // §§§ argh -> 9->SWITCH_POSCOUNT, 49->SWITCH_PWM_OFFSET/2-1
+          || pulsewidth <= RC_MIN_LIMIT_PWM                 // §§ remove???
+          || pulsewidth >= RC_MAX_LIMIT_PWM
+       ) {
         return false;  // This is an error condition
     }
 
-    if (pulsewidth < 1231) {
-        position = 0;
-    } else if (pulsewidth < 1361) {
-        position = 1;
-    } else if (pulsewidth < 1491) {
-        position = 2;
-    } else if (pulsewidth < 1621) {
-        position = 3;
-    } else if (pulsewidth < 1750) {
-        position = 4;
-    } else {
-        position = 5;
-    }
+    position = ( pulsewidth - 1000 + 50 ) / 100;                                // note: position values start from 0 for RC_MODE1
 
-    if (!debounce_completed(position)) {
+    if ( ! debounce_completed( position) ) {
         return false;
     }
 
@@ -582,13 +576,13 @@ bool RC_Channel::read_6pos_switch(int8_t& position)
 void RC_Channel::read_mode_switch()
 {
     int8_t position;
-    if (read_6pos_switch(position)) {
+    if ( read_9pos_switch( position) ) {
         // set flight mode and simple mode setting
-        mode_switch_changed(modeswitch_pos_t(position));
+        mode_switch_changed( modeswitch_pos_t(position));
     }
 }
 
-bool RC_Channel::debounce_completed(int8_t position)
+bool RC_Channel::debounce_completed( int8_t position)
 {
     // switch change not detected
     if (switch_state.current_position == position) {
@@ -813,7 +807,7 @@ bool RC_Channel::read_aux()
 #if AP_VIDEOTX_ENABLED
     } else if (_option == AUX_FUNC::VTX_POWER) {
         int8_t position;
-        if (read_6pos_switch(position)) {
+        if (read_9pos_switch(position)) {
             AP::vtx().change_power(position);
             return true;
         }
@@ -1691,6 +1685,7 @@ void RC_Channel::init_aux()
 bool RC_Channel::read_3pos_switch(RC_Channel::AuxSwitchPos &ret) const
 {
     const uint16_t in = get_radio_in();
+
     if (in <= RC_MIN_LIMIT_PWM || in >= RC_MAX_LIMIT_PWM) {
         return false;
     }

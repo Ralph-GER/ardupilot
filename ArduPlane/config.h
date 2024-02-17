@@ -43,6 +43,7 @@
 #ifndef FLAP_2_SPEED
  # define FLAP_2_SPEED 0
 #endif
+
 //////////////////////////////////////////////////////////////////////////////
 // FLIGHT_MODE
 // FLIGHT_MODE_CHANNEL
@@ -57,22 +58,31 @@
 #endif
 
 #if !defined(FLIGHT_MODE_1)
- # define FLIGHT_MODE_1                  Mode::Number::RTL
+ # define FLIGHT_MODE_1                  Mode::Number::MANUAL
 #endif
 #if !defined(FLIGHT_MODE_2)
- # define FLIGHT_MODE_2                  Mode::Number::RTL
+ # define FLIGHT_MODE_2                  Mode::Number::TRAINING
 #endif
 #if !defined(FLIGHT_MODE_3)
  # define FLIGHT_MODE_3                  Mode::Number::FLY_BY_WIRE_A
 #endif
 #if !defined(FLIGHT_MODE_4)
- # define FLIGHT_MODE_4                  Mode::Number::FLY_BY_WIRE_A
+ # define FLIGHT_MODE_4                  Mode::Number::CRUISE
 #endif
 #if !defined(FLIGHT_MODE_5)
- # define FLIGHT_MODE_5                  Mode::Number::MANUAL
+ # define FLIGHT_MODE_5                  Mode::Number::LOITER
 #endif
 #if !defined(FLIGHT_MODE_6)
- # define FLIGHT_MODE_6                  Mode::Number::MANUAL
+ # define FLIGHT_MODE_6                  Mode::Number::RTL
+#endif
+#if !defined(FLIGHT_MODE_7)
+ # define FLIGHT_MODE_7                  Mode::Number::AUTOTUNE
+#endif
+#if !defined(FLIGHT_MODE_8)
+ # define FLIGHT_MODE_8                  Mode::Number::AUTO
+#endif
+#if !defined(FLIGHT_MODE_9)
+ # define FLIGHT_MODE_9                  Mode::Number::RTL
 #endif
 
 

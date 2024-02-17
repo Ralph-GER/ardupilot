@@ -357,6 +357,13 @@ public:
         k_param_acro_yaw_rate,
         k_param_takeoff_throttle_max_t,
         k_param_autotune_options,
+
+        // 265: added flight modes for 9-position-mode-switch (§ RK)
+        //
+        k_param_flight_mode7 = 265,
+        k_param_flight_mode8,
+        k_param_flight_mode9,
+
     };
 
     AP_Int16 format_version;
@@ -413,12 +420,17 @@ public:
     // Flight modes
     //
     AP_Int8 flight_mode_channel;
+
     AP_Int8 flight_mode1;
     AP_Int8 flight_mode2;
     AP_Int8 flight_mode3;
     AP_Int8 flight_mode4;
     AP_Int8 flight_mode5;
     AP_Int8 flight_mode6;
+    AP_Int8 flight_mode7;
+    AP_Int8 flight_mode8;
+    AP_Int8 flight_mode9;
+    
     AP_Int8 initial_mode;
 
     // Navigational manoeuvring limits
