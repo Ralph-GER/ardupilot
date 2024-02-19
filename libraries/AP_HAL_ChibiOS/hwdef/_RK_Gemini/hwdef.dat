@@ -201,21 +201,21 @@ define HAL_NMEA_OUTPUT_ENABLED 0
 define HAL_BUTTON_ENABLED 0
 define AP_NOTIFY_OREOLED_ENABLED 0
 
-#only support ANALOG / MS4525 / ASP5033 driver
+#only support MS4525 ANALOG ASP5033 driver
 define AP_AIRSPEED_BACKEND_DEFAULT_ENABLED 0
+define AP_AIRSPEED_MS4525_ENABLED 1
 define AP_AIRSPEED_ANALOG_ENABLED 1
-# § changed by RK
-define AP_AIRSPEED_MS4525_ENABLED 0
-# § changed by RK
-define AP_AIRSPEED_ASP5033_ENABLED 0
+define AP_AIRSPEED_ASP5033_ENABLED 1
 
 #only support UBLOX and NMEA GPS driver
 define AP_GPS_BACKEND_DEFAULT_ENABLED 0 
 define AP_GPS_UBLOX_ENABLED 1
-define AP_GPS_NMEA_ENABLED 0
+define AP_GPS_NMEA_ENABLED 1
 define HAL_MSP_GPS_ENABLED 1
 
-# § changed by RK
-define AP_TRAMP_ENABLED 0
+define AP_TRAMP_ENABLED 1
 
 define DEFAULT_NTF_LED_TYPES 257
+
+# Added to include all changes wanted for my MPX Gemini:
+include ../hwdef_adaptions.dat

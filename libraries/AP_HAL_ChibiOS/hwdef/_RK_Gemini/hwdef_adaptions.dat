@@ -1,0 +1,8 @@
+#
+# This file is included by hwdef.dat and contains all changes made for the SpeedyBee F405 WINF flight controller used in RKs MPX Gemini.
+#
+
+define AP_AIRSPEED_MS4525_ENABLED 0
+define AP_AIRSPEED_ASP5033_ENABLED 0
+define HAL_MSP_GPS_ENABLED 0
+define AP_TRAMP_ENABLED 0
