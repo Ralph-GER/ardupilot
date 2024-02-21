@@ -160,7 +160,6 @@ SPIDEV sdcard SPI3 DEVID3 SDCARD_CS MODE0 400*KHZ 25*MHZ
 define HAL_OS_FATFS_IO 1
 
 # setup for OSD
-define OSD_ENABLED 1
 define HAL_OSD_TYPE_DEFAULT 1
 ROMFS_WILDCARD libraries/AP_OSD/fonts/font0.bin
 
@@ -171,51 +170,9 @@ define STM32_PWM_USE_ADVANCED TRUE
 
 define HAL_WITH_DSP FALSE
 
-# disable parachute and sprayer to save flash
-define HAL_PARACHUTE_ENABLED 0
-define HAL_SPRAYER_ENABLED 0
-define AP_GRIPPER_ENABLED 0
-define HAL_GENERATOR_ENABLED 0
-define AP_ICENGINE_ENABLED 0
-#define LANDING_GEAR_ENABLED 0
-define WINCH_ENABLED 0
-define HAL_ADSB_ENABLED  0
 
-define AC_OAPATHPLANNER_ENABLED 0
-define PRECISION_LANDING 0
-#define HAL_BARO_WIND_COMP_ENABLED 0
-define AP_OPTICALFLOW_ENABLED 0
+# Feature selections moved to the file included below ;)
 
 
-# Disable un-needed hardware drivers
-define HAL_WITH_ESC_TELEM 0
-define AP_FETTEC_ONEWIRE_ENABLED 0
-
-define AP_VOLZ_ENABLED 0
-define AP_ROBOTISSERVO_ENABLE 0
-define HAL_PICCOLO_CAN_ENABLE 0
-define HAL_TORQEEDO_ENABLED 0
-define HAL_RUNCAM_ENABLED 0
-define HAL_HOTT_TELEM_ENABLED 0
-define HAL_NMEA_OUTPUT_ENABLED 0
-define HAL_BUTTON_ENABLED 0
-define AP_NOTIFY_OREOLED_ENABLED 0
-
-#only support MS4525 ANALOG ASP5033 driver
-define AP_AIRSPEED_BACKEND_DEFAULT_ENABLED 0
-define AP_AIRSPEED_MS4525_ENABLED 1
-define AP_AIRSPEED_ANALOG_ENABLED 1
-define AP_AIRSPEED_ASP5033_ENABLED 1
-
-#only support UBLOX and NMEA GPS driver
-define AP_GPS_BACKEND_DEFAULT_ENABLED 0 
-define AP_GPS_UBLOX_ENABLED 1
-define AP_GPS_NMEA_ENABLED 1
-define HAL_MSP_GPS_ENABLED 1
-
-define AP_TRAMP_ENABLED 1
-
-define DEFAULT_NTF_LED_TYPES 257
-
-# Added to include all changes wanted for my MPX Gemini:
-include ../hwdef_adaptions.dat
+# Added to include all changes wanted for my SpeedyBee F405 WING on MPX Gemini:
+include ./hwdef_adaptions.dat
